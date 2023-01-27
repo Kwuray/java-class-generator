@@ -17,11 +17,11 @@ AttributeDescriptor::AttributeDescriptor(attributeAccessModifier accessModifier,
 string AttributeDescriptor::getAccessModifier(attributeAccessModifier *accessModifer) {
   switch (accessModifier) {
     case ATTRIBUTE_ACCESS_PUBLIC:
-      return "public ";
+      return "public";
     case ATTRIBUTE_ACCESS_PRIVATE:
-      return "private ";
+      return "private";
     case ATTRIBUTE_ACCESS_PROTECTED:
-      return "protected ";
+      return "protected";
     default:
       return "";
   }
@@ -31,17 +31,17 @@ string AttributeDescriptor::getAccessModifier(attributeAccessModifier *accessMod
 string AttributeDescriptor::getNonAccessModifier() {
   switch (this->nonAccessModifier) {
     case ATTRIBUTE_NONACCESS_FINAL:
-      return "final ";
+      return "final";
     case ATTRIBUTE_NONACCESS_STATIC:
-      return "static ";
+      return "static";
     case ATTRIBUTE_NONACCESS_ABSTRACT:
-      return "abstract ";
+      return "abstract";
     case ATTRIBUTE_NONACCESS_TRANSIENT:
-      return "transient ";
+      return "transient";
     case ATTRIBUTE_NONACCESS_SYNCHRONIZED:
-      return "synchronized ";
+      return "synchronized";
     case ATTRIBUTE_NONACCESS_VOLATILE:
-      return "volatile ";
+      return "volatile";
     default:
       return "";
   }
@@ -67,7 +67,7 @@ bool AttributeDescriptor::getInConstructor() {
 
 //Generate declaration (public/private/protected type var)
 string AttributeDescriptor::generateDeclaration() {
-  return this->getAccessModifier(&this->accessModifier) + this->getNonAccessModifier() + this->getType() + " " + this->getName() + ";";
+  return this->getAccessModifier(&this->accessModifier) + " " + this->getNonAccessModifier() + " " + this->getType() + " " + this->getName() + ";";
 }
 
 //Generate getter
@@ -76,7 +76,7 @@ string AttributeDescriptor::generateGetter() {
     //don't generate getter !
     return "";
   }
-  return "\t/*getter " + this->getName() + "*/\n\t" + this->getAccessModifier(&this->getter) + this->getType() + " get" + this->getName(true) + "(){\n\t\treturn this." + this->getName() + ";\n\t}";
+  return "\t/*getter " + this->getName() + "*/\n\t" + this->getAccessModifier(&this->getter) + " " + this->getType() + " get" + this->getName(true) + "(){\n\t\treturn this." + this->getName() + ";\n\t}";
 }
 
 //Generate setter
@@ -85,5 +85,5 @@ string AttributeDescriptor::generateSetter() {
     //don't generate getter !
     return "";
   }
-  return "\t/*setter " + this->getName() + "*/\n\t" + this->getAccessModifier(&this->setter) + this->getType() + " set" + this->getName(true) + "(){\n\t\tthis." + this->getName() + " = " + this->getName() + ";\n\t}";
+  return "\t/*setter " + this->getName() + "*/\n\t" + this->getAccessModifier(&this->setter) + " " + this->getType() + " set" + this->getName(true) + "(){\n\t\tthis." + this->getName() + " = " + this->getName() + ";\n\t}";
 }
