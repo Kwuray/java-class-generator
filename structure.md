@@ -28,6 +28,7 @@ Cette classe décrit ce qu'est un attribut en Java
 
 Attributs :
 - Nom
+- type
 - Access modifier (public, private, default, protected) +++
 - Droit d'accès (lecture, écriture, aucun des deux) +++
 - Non-access modifier +
