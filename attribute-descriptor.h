@@ -43,6 +43,10 @@ public:
   string getType();
   //getter name
   string getName(bool upper = false);
+  //get signature attribute (type name)
+  string getSignature();
+  //get affectation
+  string getAffectation();
   //Generate declaration (public/private/protected type var)
   string generateDeclaration();
   //Generate getter

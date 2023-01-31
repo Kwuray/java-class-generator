@@ -1,8 +1,8 @@
 /*comments*/
-public abstract class MaClasse {
+class a {
 
 	/*constructor*/
-	public MaClasse(){
+	public a(){
 		
 	}
 

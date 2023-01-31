@@ -1,0 +1,4 @@
+jcvg CLASSDESC destpath
+
+CLASSDESC :
+  -c --class : y|n/[f|a|]/name ==> (public or not/non access modifier/class name)

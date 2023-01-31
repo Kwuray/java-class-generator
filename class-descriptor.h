@@ -8,6 +8,7 @@ using namespace std;
 enum classNonAccessModifier {
   CLASS_FINAL,
   CLASS_ABSTRACT,
+  CLASS_NONE
 };
 
 class ClassDescriptor {
@@ -16,6 +17,7 @@ private:
   bool publicClass;
   classNonAccessModifier nonAccessModifier;
   bool mainFunction;
+  bool toStringFunction;
   vector<AttributeDescriptor> attributes{};
   //generate attributesContent
   string generateAttributesStr();
@@ -25,14 +27,22 @@ private:
   string generateGetters();
   //Generate setter
   string generateSetters();
+  //Generate main function
+  string generateMain();
+  //Generate toString function
+  string generateToString();
 
 public:
   //Constructeur
-  ClassDescriptor(string name, bool publicClass, classNonAccessModifier nonAccessModifier, bool mainFunction);
-  //Constructeur without non access descriptor
-  ClassDescriptor(string name, bool publicClass, bool mainFunction);
+  ClassDescriptor(string name, bool publicClass, classNonAccessModifier nonAccessModifier);
+  //setter main function
+  void setMainFunction(bool mainFunction);
+  //setter main function
+  void setToStringFunction(bool toStringFunction);
   //getter name
   string getName();
+  //getter nonaccess modifier
+  string getClassNonAccessModifier();
   //Add attribute
   void addAttribute(attributeAccessModifier accessModifier, attributeNonAccessModifier nonAccessModifier, string type, string name, attributeAccessModifier getter, attributeAccessModifier setter, bool inConstructor);
   //generate .java class file
