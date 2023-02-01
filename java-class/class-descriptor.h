@@ -47,6 +47,8 @@ public:
   void addAttribute(attributeAccessModifier accessModifier, attributeNonAccessModifier nonAccessModifier, string type, string name, attributeAccessModifier getter, attributeAccessModifier setter, bool inConstructor);
   //generate .java class file
   string generate();
+  //get non access modifier based on char
+  static classNonAccessModifier calculateNonAccess(char c);
 };
 
 #endif

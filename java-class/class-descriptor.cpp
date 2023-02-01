@@ -170,3 +170,17 @@ string ClassDescriptor::generate() {
   fileContent += "\n}";
   return fileContent;
 }
+
+//get non access modifier based on char
+classNonAccessModifier ClassDescriptor::calculateNonAccess(char c) {
+  switch (c) {
+    case 'f':
+      return CLASS_FINAL;
+    case 'a':
+      return CLASS_ABSTRACT;
+    case 'n':
+      return CLASS_NONE;
+    default:
+      return CLASS_NONE;
+  }
+}

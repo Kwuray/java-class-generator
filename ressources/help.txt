@@ -1,4 +1,36 @@
-jcvg CLASSDESC destpath
+jcvg {CLASSDESC} [OPTIONS] {destpath}
 
 CLASSDESC :
-  -c --class : y|n/[f|a|]/name ==> (public or not/non access modifier/class name)
+  -c --class
+    y|n/[{CLASS-NONACCESS-MODIFIER}]/name
+      the y|n mean public or not
+
+OPTIONS :
+  -a --attribute
+    [{ATTRIBUTE-ACCESS}]/[{ATTRIBUTE-NONACCESS}]/type/name/{GETTER-ACCESS}/SETTER-ACCESS/y|n
+      the y|n mean in constructor or not
+
+CLASS-NONACCESS :
+  f ==> final
+  a ==> abstract
+  n ==> none
+
+
+ATTRIBUTE-ACCESS :
+  + ==> public
+  - ==> private
+  ~ ==> protected
+
+ATTRIBUTE-NONACCESS :
+  f ==> final
+  s ==> static
+  a ==> abstract
+  t ==> transient
+  S ==> synchronized
+  v ==> volatile
+
+GETTER-ACCESS-MODIFIER :
+  same as ATTRIBUTE-ACCESS
+
+SETTER-ACCESS-MODIFIER :
+  same as ATTRIBUTE-ACCESS
