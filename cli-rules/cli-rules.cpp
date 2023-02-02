@@ -47,6 +47,8 @@ bool CliRules::classObj(CliParser *parser, string *value) {
     javaClass = new ClassDescriptor{matchs[3].str(), publicClass, nonAccess};
     return true;
   }
+  //no match
+  parser->setHint("value does not match pattern. please see man.");
   return false;
 }
 
@@ -59,9 +61,19 @@ bool CliRules::attrObj(CliParser *parser, string *value) {
     parser->setHint("First use -c or --class");
     return false;
   }
-  regex pattern{"^(\\x2B|-|~|n{1})/(f|s|a|t|S|v|n{1})/([[:alpha:]]+)/([[:alpha:]]+)/(\\x2B|-|~|n{1})/(\\x2B|-|~|n{1})/(y|n{1})$"};
-  smatch matchs;
-  if (regex_match(*value, matchs, pattern)) {
+  //first of all, we separate value between ":"
+  regex splitPatt{R"(\s*:\s*)"};
+  sregex_token_iterator end{};
+  for (sregex_token_iterator p{value->begin(), value->end(), splitPatt, -1}; p!=end; ++p) {
+    //and we test each value
+    string seperateValue = p->str();
+    regex pattern{"^(\\x2B|-|~|n{1})/(f|s|a|t|S|v|n{1})/([[:alpha:]]+)/([[:alpha:]]+)/(\\x2B|-|~|n{1})/(\\x2B|-|~|n{1})/(y|n{1})$"};
+    smatch matchs;
+    if (!regex_match(seperateValue, matchs, pattern)) {
+      //no match
+      parser->setHint("value does not match pattern. please see man.");
+      return false;
+    }
     //Set parameters
     attributeAccessModifier attrAccess = AttributeDescriptor::calculateAccess(matchs[1].str()[0]);
     attributeNonAccessModifier attrNonAccess = AttributeDescriptor::calculateNonAccess(matchs[2].str()[0]);
@@ -70,8 +82,6 @@ bool CliRules::attrObj(CliParser *parser, string *value) {
     bool inConstructor = matchs[7].str() == "y" ? true : false;
     //add attribute
     javaClass->addAttribute(attrAccess, attrNonAccess, matchs[3], matchs[4], getterAccess, setterAccess, inConstructor);
-    return true;
   }
-  parser->setHint("value do not match pattern. please see man.");
-  return false;
+  return true;
 }

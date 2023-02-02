@@ -8,7 +8,7 @@ CLASSDESC :
 OPTIONS :
   --attr
     [{ATTRIBUTE-ACCESS}]/[{ATTRIBUTE-NONACCESS}]/type/name/{GETTER-ACCESS}/SETTER-ACCESS/y|n
-      multiple attributes can be declared. Just seperate them with ";"
+      multiple attributes can be declared. Just seperate them with ":"
       the y|n mean in constructor or not
 
 CLASS-NONACCESS :

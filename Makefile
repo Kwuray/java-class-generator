@@ -74,7 +74,7 @@ clear:
 	rm -f $(EXECUTABLE_PATH)
 
 test:
-	$(CC) -o bin/test/cli-rules.o -c cli-rules/cli-rules.cpp $(PARAMS)
+	rm -f bin/test/*
 	$(CC) -o bin/test/test.o -c test/test.cpp $(PARAMS)
-	$(CC) -o bin/test/test bin/test/test.o bin/test/cli-rules.o $(PARAMS)
+	$(CC) -o bin/test/test bin/test/test.o $(PARAMS)
 	./bin/test/test
