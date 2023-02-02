@@ -194,8 +194,8 @@ void ClassDescriptor::generate() {
   fileContent += setters != "" ? setters + "\n\n" : "";
   //add extra methods
   fileContent += this->toStringFunction ? this->generateToString() + "\n\n" : "";
-  fileContent += this->mainFunction ? this->generateMain() + "\n\n" : "";
   fileContent += this->equalsFunction ? this->generateEquals() + "\n\n" : "";
+  fileContent += this->mainFunction ? this->generateMain() + "\n\n" : "";
   fileContent += "}";
   //ready to generate file
   // Create and open a new Java file
