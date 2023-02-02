@@ -2,7 +2,7 @@
 #include "attribute-descriptor.h"
 #include <string>
 #include <vector>
-using namespace std;
+#include <iostream>
 using namespace std;
 
 //Constructeur

@@ -6,8 +6,9 @@ CLASSDESC :
       the y|n mean public or not
 
 OPTIONS :
-  -a --attribute
+  --attr
     [{ATTRIBUTE-ACCESS}]/[{ATTRIBUTE-NONACCESS}]/type/name/{GETTER-ACCESS}/SETTER-ACCESS/y|n
+      multiple attributes can be declared. Just seperate them with ";"
       the y|n mean in constructor or not
 
 CLASS-NONACCESS :
@@ -20,6 +21,7 @@ ATTRIBUTE-ACCESS :
   + ==> public
   - ==> private
   ~ ==> protected
+  n ==> none
 
 ATTRIBUTE-NONACCESS :
   f ==> final
@@ -28,6 +30,7 @@ ATTRIBUTE-NONACCESS :
   t ==> transient
   S ==> synchronized
   v ==> volatile
+  n ==> none
 
 GETTER-ACCESS-MODIFIER :
   same as ATTRIBUTE-ACCESS

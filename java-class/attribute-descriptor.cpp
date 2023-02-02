@@ -108,3 +108,41 @@ string AttributeDescriptor::generateSetter() {
   }
   return "\t/*setter " + this->getName() + "*/\n\t" + this->getAccessModifier(&this->setter) + " " + this->getType() + " set" + this->getName(true) + "(" + this->getSignature() + "){\n\t\tthis." + this->getName() + " = " + this->getName() + ";\n\t}";
 }
+
+//get non access modifier based on char
+attributeAccessModifier AttributeDescriptor::calculateAccess(char c) {
+  switch (c) {
+    case '+':
+      return ATTRIBUTE_ACCESS_PUBLIC;
+    case '-':
+      return ATTRIBUTE_ACCESS_PRIVATE;
+    case '~':
+      return ATTRIBUTE_ACCESS_PROTECTED;
+    case 'n':
+      return ATTRIBUTE_ACCESS_NONE;
+    default:
+      return ATTRIBUTE_ACCESS_NONE;
+  }
+}
+
+//get non access modifier based on char
+attributeNonAccessModifier AttributeDescriptor::calculateNonAccess(char c) {
+  switch (c) {
+    case 'f':
+      return ATTRIBUTE_NONACCESS_FINAL;
+    case 's':
+      return ATTRIBUTE_NONACCESS_STATIC;
+    case 'a':
+      return ATTRIBUTE_NONACCESS_ABSTRACT;
+    case 't':
+      return ATTRIBUTE_NONACCESS_TRANSIENT;
+    case 'S':
+      return ATTRIBUTE_NONACCESS_SYNCHRONIZED;
+    case 'v':
+      return ATTRIBUTE_NONACCESS_VOLATILE;
+    case 'n':
+      return ATTRIBUTE_NONACCESS_NONE;
+    default:
+      return ATTRIBUTE_NONACCESS_NONE;
+  }
+}

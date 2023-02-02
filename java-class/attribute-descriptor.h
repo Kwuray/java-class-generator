@@ -53,6 +53,10 @@ public:
   string generateGetter();
   //Generate setter
   string generateSetter();
+  //get non access modifier based on char
+  static attributeAccessModifier calculateAccess(char c);
+  //get non access modifier based on char
+  static attributeNonAccessModifier calculateNonAccess(char c);
 };
 
 #endif
