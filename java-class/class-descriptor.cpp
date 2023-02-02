@@ -28,6 +28,11 @@ void ClassDescriptor::setToStringFunction(bool toStringFunction) {
   this->toStringFunction = toStringFunction;
 }
 
+//setter equals function
+void ClassDescriptor::setEqualsFunction(bool equalsFunction) {
+  this->equalsFunction = equalsFunction;
+}
+
 //getter name
 string ClassDescriptor::getName() {
   return this->name;
@@ -153,6 +158,19 @@ string ClassDescriptor::generateToString() {
   return "\t/*to string function*/\n\tpublic String toString(){\n\t\treturn \"\";\n\t}";
 }
 
+//Generate equals function
+string ClassDescriptor::generateEquals() {
+  int totalAttributes = this->attributes.size();
+  if (totalAttributes == 0) {
+    return "";
+  }
+  string result{"\t/*equals function*/\n\tpublic boolean equals(" + this->getName() + " other) {\n\t\t/*pointers*/\n\t\tif (this == other) {\n\t\t\treturn true;\n\t\t}\n\t\tif (other == null) {\n\t\t\treturn false;\n\t\t}"};
+  for (int i = 0; i < totalAttributes; i++) {
+    result += "\n\t\t/*" + this->attributes[i].getName() + "*/\n" + this->attributes[i].generateComparison();
+  }
+  return result + "\n\t\t/*it's true :)*/\n\t\treturn true;\n\t}";
+}
+
 //Generate .java class file
 void ClassDescriptor::generate() {
   string fileContent{"/*comments*/\n"};
@@ -177,6 +195,7 @@ void ClassDescriptor::generate() {
   //add extra methods
   fileContent += this->toStringFunction ? this->generateToString() + "\n\n" : "";
   fileContent += this->mainFunction ? this->generateMain() + "\n\n" : "";
+  fileContent += this->equalsFunction ? this->generateEquals() + "\n\n" : "";
   fileContent += "}";
   //ready to generate file
   // Create and open a new Java file

@@ -20,6 +20,11 @@ enum attributeNonAccessModifier {
   ATTRIBUTE_NONACCESS_VOLATILE,
 };
 
+enum attributeType {
+  TYPE_PRIMITIVE,
+  TYPE_OBJECT
+};
+
 class AttributeDescriptor {
 private:
   attributeAccessModifier accessModifier;
@@ -29,6 +34,11 @@ private:
   attributeAccessModifier getter;
   attributeAccessModifier setter;
   bool inConstructor;
+  attributeType attrType;
+  //setter name
+  void setName(string name);
+  //setter type
+  void setAttrType();
 
 public:
   //complete constructor
@@ -53,6 +63,8 @@ public:
   string generateGetter();
   //Generate setter
   string generateSetter();
+  //Generate comparison
+  string generateComparison();
   //get non access modifier based on char
   static attributeAccessModifier calculateAccess(char c);
   //get non access modifier based on char

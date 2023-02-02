@@ -15,7 +15,9 @@ bool CliParser::triggerOption(CliParser *parser, char option) {
     case 'm':
       return CliRules::mainMethod(false);
     case 's':
-      return CliRules::toStringMethod(parser);
+      return CliRules::extraMethod(parser, METHOD_TOSTRING);
+    case 'e':
+      return CliRules::extraMethod(parser, METHOD_EQUALS);
     default:
       return false;
   }
@@ -121,8 +123,8 @@ bool CliRules::mainMethod(bool abstract) {
   return true;
 }
 
-//set java toString method
-bool CliRules::toStringMethod(CliParser *parser) {
+//set java to String method
+bool CliRules::extraMethod(CliParser *parser, extraMethodType method) {
   //global variable
   extern ClassDescriptor *javaClass;
   //if no class already
@@ -130,7 +132,17 @@ bool CliRules::toStringMethod(CliParser *parser) {
     parser->setHint("First use -c, --class or -m");
     return false;
   }
-  javaClass->setToStringFunction(true);
+  switch (method) {
+    case METHOD_TOSTRING:
+      javaClass->setToStringFunction(true);
+      return true;
+    case METHOD_EQUALS:
+      javaClass->setEqualsFunction(true);
+      return true;
+    default:
+      return false;
+  }
+
   return true;
 }
 

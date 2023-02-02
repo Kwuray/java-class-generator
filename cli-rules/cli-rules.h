@@ -4,6 +4,11 @@
 #include <string>
 using namespace std;
 
+enum extraMethodType {
+  METHOD_TOSTRING,
+  METHOD_EQUALS
+};
+
 class CliRules {
 public:
   //create java class obj
@@ -13,7 +18,7 @@ public:
   //set java main method
   static bool mainMethod(bool abstract);
   //set java to String method
-  static bool toStringMethod(CliParser *parser);
+  static bool extraMethod(CliParser *parser, extraMethodType method);
   //set javafile path
   static bool setFilePath(CliParser *parser, string *value);
 

@@ -22,6 +22,7 @@ int main(int argc, char const *argv[]) {
     clp.addOption('M', true, false);
     clp.addOption('m', true, false);
     clp.addOption('s', true, false);
+    clp.addOption('e', true, false);
     clp.addOption("attr", true, true);
     clp.addOption('d', "destination-folder", true, true);
     if (clp.parse(argc, argv)) {

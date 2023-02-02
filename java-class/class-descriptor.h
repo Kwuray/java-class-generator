@@ -18,6 +18,7 @@ private:
   classNonAccessModifier nonAccessModifier;
   bool mainFunction;
   bool toStringFunction;
+  bool equalsFunction;
   string destpath{};
   vector<AttributeDescriptor> attributes{};
   //generate attributesContent
@@ -32,14 +33,18 @@ private:
   string generateMain();
   //Generate toString function
   string generateToString();
+  //Generate equals function
+  string generateEquals();
 
 public:
   //Constructeur
   ClassDescriptor(string name, bool publicClass, classNonAccessModifier nonAccessModifier);
   //setter main function
   void setMainFunction(bool mainFunction);
-  //setter main function
+  //setter to string function
   void setToStringFunction(bool toStringFunction);
+  //setter equals function
+  void setEqualsFunction(bool equalsFunction);
   //getter name
   string getName();
   //getter nonaccess modifier

@@ -1,12 +1,12 @@
 #include "attribute-descriptor.h"
 #include <string>
-
+#include <cctype>
 //Constructeur
 AttributeDescriptor::AttributeDescriptor(attributeAccessModifier accessModifier, attributeNonAccessModifier nonAccessModifier, string type, string name, attributeAccessModifier getter, attributeAccessModifier setter, bool inConstructor) {
   this->accessModifier = accessModifier;
   this->nonAccessModifier = nonAccessModifier;
   this->type = type;
-  this->name = name;
+  this->setName(name);
   this->getter = getter;
   this->setter = setter;
   this->inConstructor = inConstructor;
@@ -60,6 +60,17 @@ string AttributeDescriptor::getName(bool upper) {
   return this->name;
 }
 
+//setter name
+void AttributeDescriptor::setName(string name) {
+  this->name = name;
+  this->setAttrType();
+}
+
+//setter type
+void AttributeDescriptor::setAttrType() {
+  this->attrType = isupper(this->getType()[0]) ? TYPE_OBJECT : TYPE_PRIMITIVE;
+}
+
 //getter signature attribute (type name)
 string AttributeDescriptor::getSignature() {
   return this->getType() + " " + this->getName();
@@ -107,6 +118,16 @@ string AttributeDescriptor::generateSetter() {
     return "";
   }
   return "\t/*setter " + this->getName() + "*/\n\t" + this->getAccessModifier(&this->setter) + " " + this->getType() + " set" + this->getName(true) + "(" + this->getSignature() + "){\n\t\tthis." + this->getName() + " = " + this->getName() + ";\n\t}";
+}
+
+//Generate comparison
+string AttributeDescriptor::generateComparison() {
+  switch (this->attrType) {
+    case TYPE_PRIMITIVE:
+      return "\t\tif (this." + this->getName() + " != other." + this->getName() + ") {\n\t\t\treturn false;\n\t\t}";
+    case TYPE_OBJECT:
+      return "\t\tif (this." + this->getName() + " == null) {\n\t\t\tif (other." + this->getName() + " != null) {\n\t\t\t\treturn false;\n\t\t\t}\n\t\t} else if (!this." + this->getName() + ".equals(other." + this->getName() + ")) {\n\t\t\treturn false;\n\t\t}";
+  }
 }
 
 //get non access modifier based on char

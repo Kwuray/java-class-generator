@@ -18,6 +18,8 @@ OPTIONS :
     Add main method
   -s
     Add toString method
+  -e
+    Add equals function
   -d --destination-folder
     specify destination folder
 
