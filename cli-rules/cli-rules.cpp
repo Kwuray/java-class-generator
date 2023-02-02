@@ -26,6 +26,8 @@ bool CliParser::triggerOption(CliParser *parser, char option, string value) {
   switch (option) {
     case 'c':
       return CliRules::classObj(parser, &value);
+    case 'd':
+      return CliRules::setFilePath(parser, &value);
     default:
       return false;
   }
@@ -39,6 +41,10 @@ bool CliParser::triggerOption(CliParser *parser, string option, string value) {
 
   if (option == "attr") {
     return CliRules::attrObj(parser, &value);
+  }
+
+  if (option == "destination-folder") {
+    return CliRules::setFilePath(parser, &value);
   }
   return false;
 }
@@ -125,5 +131,22 @@ bool CliRules::toStringMethod(CliParser *parser) {
     return false;
   }
   javaClass->setToStringFunction(true);
+  return true;
+}
+
+//set javafile path
+bool CliRules::setFilePath(CliParser *parser, string *value) {
+  //global variable
+  extern ClassDescriptor *javaClass;
+  //if no class already
+  if (javaClass == nullptr) {
+    parser->setHint("First use -c, --class or -m");
+    return false;
+  }
+  //folder does not exist
+  if (!javaClass->setDestPath(*value)) {
+    parser->setHint("destination folder does not exist");
+    return false;
+  }
   return true;
 }

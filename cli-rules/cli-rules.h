@@ -14,6 +14,8 @@ public:
   static bool mainMethod(bool abstract);
   //set java to String method
   static bool toStringMethod(CliParser *parser);
+  //set javafile path
+  static bool setFilePath(CliParser *parser, string *value);
 
 private:
   CliRules();

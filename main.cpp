@@ -3,8 +3,6 @@
 #include "cli-parser/parser.hpp"
 #include "cli-rules/cli-rules.h"
 #include <iostream>
-#include <fstream>
-#include <regex>
 using namespace std;
 
 //global variable
@@ -25,14 +23,9 @@ int main(int argc, char const *argv[]) {
     clp.addOption('m', true, false);
     clp.addOption('s', true, false);
     clp.addOption("attr", true, true);
+    clp.addOption('d', "destination-folder", true, true);
     if (clp.parse(argc, argv)) {
-      // Create and open a new Java file
-      ofstream javaFile(javaClass->getName() + ".java");
-      // Write to the file
-      string javaFileContent = javaClass->generate();
-      javaFile << javaFileContent;
-      // Close the file
-      javaFile.close();
+      javaClass->generate();
       delete javaClass;
       return 0;
     }

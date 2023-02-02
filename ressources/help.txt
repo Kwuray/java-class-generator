@@ -18,6 +18,8 @@ OPTIONS :
     Add main method
   -s
     Add toString method
+  -d --destination-folder
+    specify destination folder
 
 CLASS-NONACCESS :
   f ==> final

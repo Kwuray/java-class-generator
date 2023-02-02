@@ -18,6 +18,7 @@ private:
   classNonAccessModifier nonAccessModifier;
   bool mainFunction;
   bool toStringFunction;
+  string destpath{};
   vector<AttributeDescriptor> attributes{};
   //generate attributesContent
   string generateAttributesStr();
@@ -46,9 +47,13 @@ public:
   //Add attribute
   void addAttribute(attributeAccessModifier accessModifier, attributeNonAccessModifier nonAccessModifier, string type, string name, attributeAccessModifier getter, attributeAccessModifier setter, bool inConstructor);
   //generate .java class file
-  string generate();
+  void generate();
   //get non access modifier based on char
   static classNonAccessModifier calculateNonAccess(char c);
+  //setter destpath
+  bool setDestPath(string folderPath);
+  //getter destpath
+  string getDestPath();
 };
 
 #endif

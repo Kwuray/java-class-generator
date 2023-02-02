@@ -1,14 +1,13 @@
 #include <string>
-#include <regex>
+#include <filesystem>
+#include <sys/stat.h>
 #include <iostream>
 using namespace std;
 
 int main(int argc, char const *argv[]) {
-  string s{"-/n/int/age/+/+;-/n/String/name/+/+"};
-  regex pat{R"(\s*;\s*)"};
-  sregex_token_iterator end{};
-  for (sregex_token_iterator p{s.begin(), s.end(), pat, -1}; p!=end; ++p) {
-    cout << p->str() << '\n';
+  if (stat("test", nullptr) == 0) {
+    std::cout << "folder exist" << '\n';
   }
+  std::cout << filesystem::current_path() << '\n';
   return 0;
 }

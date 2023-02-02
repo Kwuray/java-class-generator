@@ -139,7 +139,7 @@ bool CliParser::parse(int argc, char const *argv[]) {
           //we need to determine where is the value
           //we first check if there is an arg after
           //(next arg size > 2 and no "-" in front)
-          if (potentialArgValueIndex < argvS.size() && (argvS[potentialArgValueIndex].size() > 2 && argvS[potentialArgValueIndex][0] != '-')) {
+          if (potentialArgValueIndex < argvS.size() && (argvS[potentialArgValueIndex].size() >= 1 && argvS[potentialArgValueIndex][0] != '-')) {
             string value = argvS[potentialArgValueIndex];
             //the value is the next arg, we are sure
             if (!this->triggerOption(this, shortOption, value)) {

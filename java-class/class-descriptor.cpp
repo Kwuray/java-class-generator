@@ -3,6 +3,9 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <filesystem>
+#include <fstream>
+#include <sys/stat.h>
 using namespace std;
 
 //Constructeur
@@ -12,6 +15,7 @@ ClassDescriptor::ClassDescriptor(string name, bool publicClass, classNonAccessMo
   this->nonAccessModifier = nonAccessModifier;
   this->mainFunction = false;
   this->toStringFunction = false;
+  this->setDestPath(filesystem::current_path());
 }
 
 //setter main function
@@ -150,7 +154,7 @@ string ClassDescriptor::generateToString() {
 }
 
 //Generate .java class file
-string ClassDescriptor::generate() {
+void ClassDescriptor::generate() {
   string fileContent{"/*comments*/\n"};
   //check if class is public
   fileContent += this->publicClass ? "public " : "";
@@ -174,7 +178,13 @@ string ClassDescriptor::generate() {
   fileContent += this->toStringFunction ? this->generateToString() + "\n\n" : "";
   fileContent += this->mainFunction ? this->generateMain() + "\n\n" : "";
   fileContent += "}";
-  return fileContent;
+  //ready to generate file
+  // Create and open a new Java file
+  ofstream javaFile(this->getDestPath());
+  // Write to the file
+  javaFile << fileContent;
+  // Close the file
+  javaFile.close();
 }
 
 //get non access modifier based on char
@@ -189,4 +199,20 @@ classNonAccessModifier ClassDescriptor::calculateNonAccess(char c) {
     default:
       return CLASS_NONE;
   }
+}
+
+//setter destpath
+bool ClassDescriptor::setDestPath(string folderPath) {
+  //we first check if dest path exist
+  struct stat st;
+  if (stat(folderPath.c_str(), &st) != 0) {
+    return false;
+  }
+  this->destpath = folderPath + "/" + this->getName() + ".java";
+  return true;
+}
+
+//getter destpath
+string ClassDescriptor::getDestPath() {
+  return this->destpath;
 }
