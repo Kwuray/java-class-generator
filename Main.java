@@ -1,8 +1,8 @@
 /*comments*/
-final class t {
+public class Main {
 
 	/*constructor*/
-	public t(){
+	public Main(){
 		
 	}
 
@@ -11,8 +11,4 @@ final class t {
 		
 	}
 
-	/*to string function*/
-	public String toString(){
-		return "";
-	}
 }

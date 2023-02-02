@@ -1,12 +1,12 @@
 /*comments*/
-public final class Chameau {
+public final class Dragon {
 
 	/*attributes*/
 	private int age;
 	private synchronized String name;
 
 	/*constructor*/
-	public Chameau(int age, String name) {
+	public Dragon(int age, String name) {
 		setAge(age);
 		this.name = name;
 	}
@@ -21,13 +21,9 @@ public final class Chameau {
 		this.age = age;
 	}
 
-	/*main function*/
-	public static void main(String[] args){
-		
-	}
-
 	/*to string function*/
 	public String toString(){
 		return "";
 	}
+
 }

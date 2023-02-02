@@ -7,6 +7,20 @@
 #include <iostream>
 using namespace std;
 
+//trigger short option - no value
+bool CliParser::triggerOption(CliParser *parser, char option) {
+  switch (option) {
+    case 'M':
+      return CliRules::mainMethod(true);
+    case 'm':
+      return CliRules::mainMethod(false);
+    case 's':
+      return CliRules::toStringMethod(parser);
+    default:
+      return false;
+  }
+}
+
 //trigger short option - value
 bool CliParser::triggerOption(CliParser *parser, char option, string value) {
   switch (option) {
@@ -34,6 +48,7 @@ bool CliRules::classObj(CliParser *parser, string *value) {
   //global variable
   extern ClassDescriptor *javaClass;
   if (javaClass != nullptr) {
+    parser->setHint("Java class is already defined");
     //already define !
     return false;
   }
@@ -58,7 +73,7 @@ bool CliRules::attrObj(CliParser *parser, string *value) {
   extern ClassDescriptor *javaClass;
   if (javaClass == nullptr) {
     //cannot create attribute !
-    parser->setHint("First use -c or --class");
+    parser->setHint("First use -c, --class or -m");
     return false;
   }
   //first of all, we separate value between ":"
@@ -83,5 +98,32 @@ bool CliRules::attrObj(CliParser *parser, string *value) {
     //add attribute
     javaClass->addAttribute(attrAccess, attrNonAccess, matchs[3], matchs[4], getterAccess, setterAccess, inConstructor);
   }
+  return true;
+}
+
+//set java main method
+bool CliRules::mainMethod(bool abstract) {
+  //global variable
+  extern ClassDescriptor *javaClass;
+  //if no class already
+  if (javaClass == nullptr) {
+    //create a class Main
+    classNonAccessModifier classAccess = abstract ? CLASS_ABSTRACT : CLASS_NONE;
+    javaClass = new ClassDescriptor{"Main", true, classAccess};
+  }
+  javaClass->setMainFunction(true);
+  return true;
+}
+
+//set java toString method
+bool CliRules::toStringMethod(CliParser *parser) {
+  //global variable
+  extern ClassDescriptor *javaClass;
+  //if no class already
+  if (javaClass == nullptr) {
+    parser->setHint("First use -c, --class or -m");
+    return false;
+  }
+  javaClass->setToStringFunction(true);
   return true;
 }

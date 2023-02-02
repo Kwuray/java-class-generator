@@ -10,6 +10,10 @@ public:
   static bool classObj(CliParser *parser, string *value);
   //create java attribute obj
   static bool attrObj(CliParser *parser, string *value);
+  //set java main method
+  static bool mainMethod(bool abstract);
+  //set java to String method
+  static bool toStringMethod(CliParser *parser);
 
 private:
   CliRules();

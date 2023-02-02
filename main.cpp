@@ -21,10 +21,11 @@ int main(int argc, char const *argv[]) {
   try {
     CliParser clp{true};
     clp.addOption('c', "class", true, true);
+    clp.addOption('M', true, false);
+    clp.addOption('m', true, false);
+    clp.addOption('s', true, false);
     clp.addOption("attr", true, true);
     if (clp.parse(argc, argv)) {
-      javaClass->setToStringFunction(true);
-      javaClass->setMainFunction(true);
       // Create and open a new Java file
       ofstream javaFile(javaClass->getName() + ".java");
       // Write to the file

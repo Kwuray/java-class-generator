@@ -108,10 +108,13 @@ string ClassDescriptor::generateGetters() {
     return "";
   }
   string result{};
+  bool firstGetter = false;
   for (int i = 0; i < totalAttributes; i++) {
     string generatedGetter = this->attributes[i].generateGetter();
     if (generatedGetter != "") {
-      result += "\n" + generatedGetter;
+      //add one line before if it's not the first one
+      firstGetter = !firstGetter ? true : false,
+      result += firstGetter ? generatedGetter : "\n" + generatedGetter;
     }
   }
   return result;
@@ -124,10 +127,13 @@ string ClassDescriptor::generateSetters() {
     return "";
   }
   string result{};
+  bool firstSetter = false;
   for (int i = 0; i < totalAttributes; i++) {
     string generatedSetter = this->attributes[i].generateSetter();
     if (generatedSetter != "") {
-      result += "\n" + generatedSetter;
+      //add one line before if it's not the first one
+      firstSetter = !firstSetter ? true : false;
+      result += firstSetter ? generatedSetter : "\n" + generatedSetter;
     }
   }
   return result;
@@ -156,18 +162,18 @@ string ClassDescriptor::generate() {
   //add every attributes declaration
   string attributes = this->generateAttributesStr();
   fileContent += attributes != "" ? attributes + "\n\n" : "";
-  //add constructor
-  fileContent += this->generateConstructor();
+  //add constructor only if no abstract
+  fileContent += this->nonAccessModifier == CLASS_ABSTRACT ? "" : this->generateConstructor() + "\n\n";
   //add getters
   string getters = this->generateGetters();
-  fileContent += getters != "" ? "\n" + getters : "";
+  fileContent += getters != "" ? getters + "\n\n" : "";
   //add setters
   string setters = this->generateSetters();
-  fileContent += setters != "" ? "\n" + setters : "";
-  //add main function
-  fileContent += this->mainFunction ? "\n\n" + this->generateMain() : "";
-  fileContent += this->toStringFunction ? "\n\n" + this->generateToString() : "";
-  fileContent += "\n}";
+  fileContent += setters != "" ? setters + "\n\n" : "";
+  //add extra methods
+  fileContent += this->toStringFunction ? this->generateToString() + "\n\n" : "";
+  fileContent += this->mainFunction ? this->generateMain() + "\n\n" : "";
+  fileContent += "}";
   return fileContent;
 }
 

@@ -1,4 +1,6 @@
-jcvg {CLASSDESC} [OPTIONS] {destpath}
+USAGE :
+  jcvg {CLASSDESC} [OPTIONS] {destpath}
+  jcvg -M|-m ==> Main.java
 
 CLASSDESC :
   -c --class
@@ -10,6 +12,12 @@ OPTIONS :
     [{ATTRIBUTE-ACCESS}]/[{ATTRIBUTE-NONACCESS}]/type/name/{GETTER-ACCESS}/SETTER-ACCESS/y|n
       multiple attributes can be declared. Just seperate them with ":"
       the y|n mean in constructor or not
+  -M
+    Add main method ==> abstract class, no constructor
+  -m
+    Add main method
+  -s
+    Add toString method
 
 CLASS-NONACCESS :
   f ==> final
