@@ -1,4 +1,4 @@
-#Help file
+# Help file
 
 USAGE :
   jcvg {CLASSDESC} [OPTIONS] {destpath}
@@ -10,15 +10,15 @@ CLASSDESC :
       the y|n mean public or not
 
 OPTIONS :
-  --attr
+  \--attr
     [{ATTRIBUTE-ACCESS}]/[{ATTRIBUTE-NONACCESS}]/type/name/{GETTER-ACCESS}/SETTER-ACCESS/y|n
       multiple attributes can be declared. Just seperate them with ":"
       the y|n mean in constructor or not
-  -M
+  \-M
     Add main method ==> abstract class, no constructor
-  -m
+  \-m
     Add main method
-  -s
+  \-s
     Add toString method
 
 CLASS-NONACCESS :
@@ -28,8 +28,8 @@ CLASS-NONACCESS :
 
 
 ATTRIBUTE-ACCESS :
-  + ==> public
-  - ==> private
+  \+ ==> public
+  \- ==> private
   ~ ==> protected
   n ==> none
 
