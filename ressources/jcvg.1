@@ -1,0 +1,145 @@
+\." Manpage for jcvg
+\." Contact dagneaux.nicolas@icloud.com to correct errors.
+
+.Dd $Mdocdate$
+.Dt jcvg 1
+
+.Sh NAME
+.Nm jcvg
+.Nd generate java class file with attributes and commons methods
+
+.Sh SYNOPSIS
+.Nm
+.Fl c Ar classdesc
+.Op Fl ems
+.Op Fl d Ar dirpath
+.Nm
+.Op Fl M | m
+
+.Sh DESCRIPTION
+The
+.Nm
+utility generate java file. You describe the class and attributes you want and get a ".java" file where you want
+.Pp
+Options that
+.Nm
+understands:
+
+.Bl -tag -width indent
+.It Fl -attr Ar argdesc
+Describe the argument(s) you want. See
+.Ar arguments
+
+.It Fl c Fl -class Ar classdesc
+Describe the class you want. See
+.Ar arguments
+
+.It Fl d Fl -destination-folder Ar dirpath
+Specidy folder destination. Use current dir (".") by default
+
+.It Fl e
+Add equals methods. Need
+.Fl c Fl -class
+before
+
+.It Fl M
+add Main method. Implicitly --class=y/a/Main
+
+.It Fl m
+add main method. Need
+.Fl c Fl -class
+before
+
+.It Fl s
+add toString method. Need
+.El
+
+.Ss ARGUMENTS
+.Bl -tag -width indent
+
+.It Ar argdesc
+You can specify multiples arguments, seperate them with ":". Each element is seperated by "/". See them below :
+.Bl -tag -width indent
+.It
+.Ar attribute-access
+.It
+.Ar attribute-nonaccess
+.It
+type --> String, int, SomeObject...
+.It
+name --> attribute's name
+.It
+.Ar getter-access
+.It
+.Ar setter-access
+.It
+in constructor ? --> y|n (yes or no)
+.El
+
+.It Ar attribute-access getter-access setter-access
+Pick one :
+.Bl -tag -width indent
+.It
++ ==> public
+.It
+- ==> private
+.It
+~ ==> protected
+.It
+n ==> none
+.El
+
+.It Ar attribute-nonaccess
+Pick one :
+.Bl -tag -width indent
+.It
+f ==> final
+.It
+s ==> static
+.It
+a ==> abstract
+.It
+t ==> transient
+.It
+S ==> synchronized
+.It
+v ==> volatile
+.It
+n ==> none
+.El
+
+.It Ar classdesc
+Each element is seperated by "/". See them below :
+.Bl -tag -width indent
+.It
+specify public or not --> y|n (yes or no)
+.It
+.Ar class-nonaccess
+.It
+name --> class' name
+.El
+
+.It Ar class-nonaccess
+Pick one :
+.Bl -tag -width indent
+.It
+f ==> final
+.It
+a ==> abstract
+.It
+n ==> none
+.El
+.El
+
+.Sh EXAMPLES
+.Nm
+.Fl c
+y/f/Cars
+.Fl -attr
+-/n/int/kilometers/+/+/y
+.Fl mse
+.Fl d
+.br
+.Nm
+.Fl M
+some/folder

@@ -34,11 +34,6 @@ public class Tableau {
 		return "";
 	}
 
-	/*main function*/
-	public static void main(String[] args){
-		
-	}
-
 	/*equals function*/
 	public boolean equals(Tableau other) {
 		/*pointers*/
@@ -62,6 +57,11 @@ public class Tableau {
 		}
 		/*it's true :)*/
 		return true;
+	}
+
+	/*main function*/
+	public static void main(String[] args){
+		
 	}
 
 }
