@@ -15,6 +15,7 @@ ClassDescriptor::ClassDescriptor(string name, bool publicClass, classNonAccessMo
   this->nonAccessModifier = nonAccessModifier;
   this->mainFunction = false;
   this->toStringFunction = false;
+  this->setEqualsFunction(false);
   this->setDestPath(filesystem::current_path());
 }
 

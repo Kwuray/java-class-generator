@@ -1,4 +1,4 @@
-CC = clang++
+CC = g++
 PARAMS = -std=c++20 -Wall
 
 EXECUTABLE_FOLDER = bin/exec

@@ -117,7 +117,7 @@ string AttributeDescriptor::generateSetter() {
     //don't generate getter !
     return "";
   }
-  return "\t/*setter " + this->getName() + "*/\n\t" + this->getAccessModifier(&this->setter) + " " + this->getType() + " set" + this->getName(true) + "(" + this->getSignature() + "){\n\t\tthis." + this->getName() + " = " + this->getName() + ";\n\t}";
+  return "\t/*setter " + this->getName() + "*/\n\t " + this->getAccessModifier(&this->setter) + " void set" + this->getName(true) + "(" + this->getSignature() + "){\n\t\tthis." + this->getName() + " = " + this->getName() + ";\n\t}";
 }
 
 //Generate comparison
